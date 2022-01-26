@@ -10,18 +10,19 @@ import com.soywiz.korio.file.std.*
 import com.soywiz.korma.geom.*
 import com.soywiz.korma.interpolation.*
 
-suspend fun main() = Korge(width = 512, height = 512, bgcolor = Colors["#53ae00"]) {
-	val minDegrees = (-16).degrees
-	val maxDegrees = (+16).degrees
+suspend fun main() = Korge(width = 1280, height = 960) {
+	val backgroundColor = roundRect(100.0,100.0, 5.0, 5.0){
+		fill = RGBA(240, 228, 218)
 
+}
 	val image = image(resourcesVfs["car-full.png"].readBitmap()) {
-		rotation = maxDegrees
+		//rotation = maxDegrees
 		anchor(.5, .5)
 		scale(.4)
 		position(256, 256)
 	}
 	while (true) {
-		image.moveBy(5, 5)
+		image.moveBy(15, 0)
 		println(image.x)
 	}
 }
