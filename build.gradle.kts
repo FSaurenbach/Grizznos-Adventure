@@ -18,6 +18,7 @@ apply<KorgeGradlePlugin>()
 
 korge {
 	id = "de.schneckedde.grizzno"
+        name = "Grizznos Adventure"
 
 
 	targetAll()
