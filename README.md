@@ -1,1 +1,1 @@
-Try my game on https://www.schneckedde.website 
+Try my game on https://schneckedde.website 
