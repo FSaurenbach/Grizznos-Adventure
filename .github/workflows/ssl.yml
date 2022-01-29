@@ -7,7 +7,7 @@ jobs:
         with:
           version: 3.0.0
           account-conf-content: ${{ secrets.ACME_SH_ACCOUNT_CONF }}
-          domains: example.com example.net example.org example.edu
+          domains: schneckedde.website
           domains-file: 'certificate.crt'
           append-wildcard: true
           arguments: --dns dns_cf --challenge-alias example.com
