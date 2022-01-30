@@ -1,54 +1,75 @@
-import com.soywiz.klock.*
-import com.soywiz.klock.hr.hrMilliseconds
-import com.soywiz.korge.*
-import com.soywiz.korge.input.KeysEvents
-import com.soywiz.korge.tween.*
+import com.soywiz.korev.Key
+import com.soywiz.korev.KeyEvent
+import com.soywiz.korge.Korge
+import com.soywiz.korge.input.keys
 import com.soywiz.korge.view.*
 import com.soywiz.korge.view.tween.moveBy
-import com.soywiz.korge.view.tween.moveTo
 import com.soywiz.korge.view.tween.rotateBy
-import com.soywiz.korim.color.*
-import com.soywiz.korim.format.*
-import com.soywiz.korio.file.std.*
-import com.soywiz.korma.geom.*
-import com.soywiz.korma.interpolation.*
-import com.soywiz.korev.*
-import com.soywiz.korge.ui.uiTextInput
-import com.soywiz.korgw.sdl2.SDLKeyCode
+import com.soywiz.korim.color.RGBA
+import com.soywiz.korim.format.readBitmap
+import com.soywiz.korio.dynamic.KDynamic.Companion.keys
+import com.soywiz.korio.file.std.resourcesVfs
+import com.soywiz.korma.geom.degrees
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
-suspend fun main() = Korge(width = 1280, height = 960) {
-	val backgroundColor = roundRect(1000.0,1000.0, 5.0, 5.0){
-		fill = RGBA(240, 228, 218)
-		var car_rotation = (90).degrees
 
-}
-	val image = image(resourcesVfs["flat-car.png"].readBitmap()) {
+suspend fun main() = Korge(width = 1920, height = 1080) {
 
-		anchor(.5, .5)
-		scale(.4)
-		position(256, 256)
 
-	}
-	val input = views.input
 
-	backgroundColor.addUpdater {
+    suspend fun ride_left() = coroutineScope {  // this: CoroutineScope
 
-		if (input.keys.justReleased(Key.ENTER)) sendText("hello")
+        launch {
 
-		if (input.keys.justReleased(Key.K)) sendText("UI")
-		if (input.keys.justReleased(Key.ESCAPE)) views.gameWindow.close()
-	}
 
-	//var d = uiTextInput("hi", 128.0, 24.0)
+            val backgroundColor = roundRect(1920.0, 1080.0, 5.0, 5.0) {
+                fill = RGBA(240, 228, 218)
+            }
+            val input = views.input
 
-	image.rotateBy(90.degrees)
-	while (true) {
-		image.moveBy(15, 0)
 
-	}
+
+            val image = image(resourcesVfs["flat-car.png"].readBitmap()) {
+                anchor(.5, .5)
+                scale(.4)
+                position(256, 256)
+
+            }
+
+            keys {
+                down(Key.ESCAPE) {
+                    sendText("Escape pressed")
+                }
+                down(Key.UP) {
+                    image.moveBy(0.0, -29.0)
+                    println(image.y)
+                }
+                down(Key.LEFT) {
+                    sendText("J")
+                }
+                down(Key.DOWN) {
+                    sendText("J")
+                }
+            }
+        }
+
+        println("Hello")
+    }
+
+    val input = views.input
+    ride_left()
+
+
+
 }
 
 fun sendText(s: String) {
-	println(s)
+    println(s)
 
 }
+
+
+
+
