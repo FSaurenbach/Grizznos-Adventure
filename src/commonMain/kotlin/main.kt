@@ -1,3 +1,4 @@
+package de.schneckedde.grizzno
 import com.soywiz.korev.Key
 import com.soywiz.korev.KeyEvent
 import com.soywiz.korge.Korge
@@ -13,6 +14,7 @@ import com.soywiz.korma.geom.degrees
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import de.schneckedde.grizzno.keybinds
 
 
 suspend fun main() = Korge(width = 1920, height = 1080) {
@@ -37,7 +39,7 @@ suspend fun main() = Korge(width = 1920, height = 1080) {
                 position(256, 256)
 
             }
- fd
+/*
             keys {
                 down(Key.ESCAPE) {
                     sendText("Escape pressed")
@@ -54,9 +56,10 @@ suspend fun main() = Korge(width = 1920, height = 1080) {
                 }
             }
         }
+        */
+        KeyBindings().onKeyDown(W)
 
         println("Hello")
-        pr
     }
 
     val input = views.input
@@ -70,3 +73,7 @@ fun sendText(s: String) {
     println(s)
 
 }
+
+
+
+
