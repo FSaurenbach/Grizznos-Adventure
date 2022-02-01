@@ -37,7 +37,7 @@ suspend fun main() = Korge(width = 1920, height = 1080) {
                 position(256, 256)
 
             }
-
+ fd
             keys {
                 down(Key.ESCAPE) {
                     sendText("Escape pressed")
@@ -56,6 +56,7 @@ suspend fun main() = Korge(width = 1920, height = 1080) {
         }
 
         println("Hello")
+        pr
     }
 
     val input = views.input
@@ -69,7 +70,3 @@ fun sendText(s: String) {
     println(s)
 
 }
-
-
-
-
