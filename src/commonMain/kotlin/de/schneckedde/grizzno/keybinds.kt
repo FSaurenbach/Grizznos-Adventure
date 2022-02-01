@@ -2,7 +2,7 @@ package de.schneckedde.grizzno
 import com.soywiz.korev.Key
 
 class KeyBindings(){
-  private fun onKeyDown(key: Key) {
+  public fun onKeyDown(key: Key) {
         when (key) {
             Key.W -> {
                 println("W pressed")
