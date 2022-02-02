@@ -1,7 +1,23 @@
+package de.schneckedde.grizzno
+import com.soywiz.korev.Key
 
-
-class keybinds1 {
-    fun dd(){
-        println("dfjai")
-    }
-}
+class KeyBindings(){
+  public fun onKeyDown(key: Key) {
+        when (key) {
+            Key.W -> {
+                println("W pressed")
+                }
+            
+            Key.A -> {
+                println("A pressed")
+            }
+            Key.S -> {
+                println("S pressed")
+                }
+            Key.D -> {
+                println("D pressed")
+                }
+                }
+                }
+                }
+                
