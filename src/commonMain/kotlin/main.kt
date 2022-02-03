@@ -3,21 +3,23 @@ import com.soywiz.korge.Korge
 import com.soywiz.korge.input.keys
 import com.soywiz.korge.view.*
 import com.soywiz.korge.view.tween.moveBy
+import com.soywiz.korgw.GameWindow
 import com.soywiz.korim.color.RGBA
 import com.soywiz.korim.format.readBitmap
 import com.soywiz.korio.file.std.resourcesVfs
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
-import de.schneckedde.grizzno.*
 
 
-suspend fun main() = Korge(width = 1920, height = 1080) {
 
-    keybinds1().dd()
+public suspend fun main() = Korge(width = 1920, height = 1080, quality = GameWindow.Quality.PERFORMANCE, title = "Grizznos Adventure by Schneckedde") {
 
-    suspend fun ride_left() = coroutineScope {  // this: CoroutineScope
+
+
+    suspend fun start_game() = coroutineScope {  // this: CoroutineScope
 
         launch {
+
 
 
             val backgroundColor = roundRect(1920.0, 1080.0, 5.0, 5.0) {
@@ -27,35 +29,36 @@ suspend fun main() = Korge(width = 1920, height = 1080) {
 
 
 
-            val image = image(resourcesVfs["flat-car.png"].readBitmap()) {
+            var image = image(resourcesVfs["flat-car.png"].readBitmap()) {
                 anchor(.5, .5)
                 scale(.4)
                 position(256, 256)
 
             }
+            suspend fun move_car(x: Double, y: Double){
+                var x = x
+                var y = y
+                image.moveBy(x, y)
 
-            keys {
-                down(Key.ESCAPE) {
-                    sendText("Escape pressed")
-                }
-                down(Key.UP) {
-                    image.moveBy(0.0, -29.0)
-                    println(image.y)
-                }
-                down(Key.LEFT) {
-                    sendText("J")
-                }
-                down(Key.DOWN) {
-                    sendText("J")
-                }
             }
+            keys{
+                down(Key.ESCAPE) {move_car(0.0, 50.0) }
+                down(Key.W) {move_car(0.0, -15.0) }
+                down(Key.A) {move_car(-50.0, 0.0) }
+                down(Key.S) {move_car(0.0, 50.0) }
+                down(Key.D) {move_car(50.0, 0.0) }
+            }
+
+
         }
+
+
 
         println("Hello")
     }
 
     val input = views.input
-    ride_left()
+    start_game()
 
 
 
@@ -63,6 +66,7 @@ suspend fun main() = Korge(width = 1920, height = 1080) {
 
 fun sendText(s: String) {
     println(s)
+
 
 }
 
