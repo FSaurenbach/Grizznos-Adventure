@@ -2,6 +2,7 @@ import com.soywiz.korev.Key
 import com.soywiz.korge.Korge
 import com.soywiz.korge.view.*
 import com.soywiz.korgw.GameWindow
+import com.soywiz.korim.color.Colors
 import com.soywiz.korim.color.RGBA
 import com.soywiz.korim.format.readBitmap
 import com.soywiz.korio.file.std.resourcesVfs
@@ -32,7 +33,9 @@ suspend fun main() = Korge(
             }
             val input = views.input
 
+            val rect = solidRect(100.0, 100.0, Colors["#ff4ad0"]){
 
+            }
             var image = image(resourcesVfs["flat-car.png"].readBitmap()) {
                 anchor(.5, .5)
                 scale(.4)
@@ -40,24 +43,22 @@ suspend fun main() = Korge(
 
             }
             image.addUpdater {
+                if (!(collidesWith(rect))) {
+                    speed = 2.5
+                    if ((input.keys.pressing(Key.RIGHT)) || (input.keys.pressing(Key.D))) {
+                        image.x += speed
+                        image.rotation((+90).degrees)
+                    } else if ((input.keys.pressing(Key.UP)) || (input.keys.pressing(Key.W))) {
+                        image.y -= speed
+                        image.rotation((+0).degrees)
+                    } else if ((input.keys.pressing(Key.DOWN)) || (input.keys.pressing(Key.S))) {
+                        image.y += speed
+                        image.rotation((-180).degrees)
+                    } else if ((input.keys.pressing(Key.LEFT)) || (input.keys.pressing(Key.A))) {
+                        image.x -= speed
+                        image.rotation((-90).degrees)
 
-                speed = 2.5
-                if ((input.keys.pressing(Key.RIGHT)) || (input.keys.pressing(Key.D))) {
-                    image.x += speed
-                    image.rotation((+90).degrees)
-
-                } else if ((input.keys.pressing(Key.UP)) || (input.keys.pressing(Key.W))) {
-                    image.y -= speed
-                    image.rotation((+0).degrees)
-
-                } else if ((input.keys.pressing(Key.DOWN)) || (input.keys.pressing(Key.S))) {
-                    image.y += speed
-                    image.rotation((-180).degrees)
-
-                } else if ((input.keys.pressing(Key.LEFT)) || (input.keys.pressing(Key.A))) {
-                    image.x -= speed
-                    image.rotation((-90).degrees)
-
+                    }
                 }
             }
 
@@ -69,7 +70,7 @@ suspend fun main() = Korge(
         println("Hello")
     }
 
-    val input = views.input
+
     start_game()
 
 
