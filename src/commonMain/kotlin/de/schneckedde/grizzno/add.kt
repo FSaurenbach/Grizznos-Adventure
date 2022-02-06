@@ -3,6 +3,7 @@ package de.schneckedde.grizzno
 import com.soywiz.korge.view.Container
 import com.soywiz.korge.view.Image
 import com.soywiz.korge.view.Stage
+import com.soywiz.korge.view.scale
 import com.soywiz.korim.format.readBitmap
 import com.soywiz.korio.file.std.resourcesVfs
 
@@ -27,9 +28,11 @@ class add {
 
     suspend fun Car(tree: Container, stage: Stage) {
         //fun Key.isPressed(): Boolean = stage.views.input.keys[this]
-
+        
         val car_image = Image(resourcesVfs["flat-car.png"].readBitmap())
+        
         InputHandler().move_car(stage, car_image)
+        car_image.scale(0.5f, 0.5f)
         tree.addChild(car_image)
     }
 }

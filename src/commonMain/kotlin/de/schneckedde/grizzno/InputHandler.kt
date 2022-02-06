@@ -6,6 +6,7 @@ import com.soywiz.korge.view.Stage
 import com.soywiz.korge.view.addUpdater
 
 class InputHandler {
+    
 
     suspend fun move_car(stage: Stage, car_image: Image) {
         var stage = stage
