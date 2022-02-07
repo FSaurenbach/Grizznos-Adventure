@@ -14,7 +14,6 @@ object MainModule : Module() {
 	override val mainScene = MainMenuScene::class
 	override val title = "Grizznos Adventure by Schneckedde"
 	override val icon: String = "flat-car.png"
-
 	override val fullscreen = true
 	
 	/** Add the scenes to the module*/

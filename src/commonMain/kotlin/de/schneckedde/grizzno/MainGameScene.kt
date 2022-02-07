@@ -17,8 +17,9 @@ import org.jbox2d.dynamics.BodyType
 
 class MainGameScene() : Scene() {
 	override suspend fun Container.sceneInit() {
-		SolidRect(900.0, 900.0, Colors.BLUE)
-		var rect = SolidRect(900.0, 900.0, Colors.WHITE).position(100.0, 0.0).registerBodyWithFixture(
+		var width = views.virtualWidth / 2.0
+		var height = views.virtualHeight / 2.0
+		var rect = SolidRect(900.0, 900.0, Colors.WHITE).position(width, height).registerBodyWithFixture(
 			1.0f, 1.0f, 1.0f, 1.0f,
 			
 			1.0f, 1.0f,
@@ -26,7 +27,7 @@ class MainGameScene() : Scene() {
 			type = BodyType.STATIC, friction = 1.0
 		)
 		
-		val car_image = Image(resourcesVfs["flat-car.png"].readBitmap()).registerBodyWithFixture(
+		val car_image = Image(resourcesVfs["flat-car.png"].readBitmap()).position(width, height).registerBodyWithFixture(
 			0.0f, 0.0f, 0.0f,
 			
 			1.0f, 1.0f, 1.0f, friction = 1.0, type = BodyType.KINEMATIC
