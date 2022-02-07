@@ -22,5 +22,5 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew jvmTest
     - name: Build with JavaScript
-      run: ./gradlew jsRun
+      run: ./gradlew jsBrowserProductionWebpack
     
