@@ -15,7 +15,7 @@ class MainMenuScene() : Scene() {
 			
 			text = "Play"
 			
-			position(views.virtualWidth / 2 - 128, views.virtualHeight / 2 - 64)
+			position(views.virtualWidth / 2, views.virtualHeight / 2)
 			onClick {
 				print("§jfa")
 				sceneContainer.changeTo<MainGameScene>()
