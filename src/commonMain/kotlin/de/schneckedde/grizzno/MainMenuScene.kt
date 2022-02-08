@@ -2,6 +2,7 @@ package de.schneckedde.grizzno
 
 import com.soywiz.korge.input.onClick
 import com.soywiz.korge.scene.Scene
+import com.soywiz.korge.ui.textSize
 import com.soywiz.korge.ui.uiButton
 import com.soywiz.korge.view.*
 import com.soywiz.korgw.GameWindow
@@ -12,7 +13,7 @@ class MainMenuScene() : Scene() {
 		var background = SolidRect(views.virtualWidth, views.virtualHeight, Colors["#ffe357c6"])
 		addChild(background)
 		container {
-			var playButton = uiButton(256.0, 32.0) {
+			var playButton = uiButton(512.0, 64.0) {
 				text = "Play"
 				colorMul = Colors.GREEN
 				
@@ -22,7 +23,7 @@ class MainMenuScene() : Scene() {
 					sceneContainer.changeTo<MainGameScene>()
 				}
 			}
-			var exitButton = uiButton(256.0, 32.0) {
+			var exitButton = uiButton(512.0, 64.0) {
 				text = "Exit"
 				colorMul = Colors.RED
 				var x = playButton.x
@@ -34,8 +35,10 @@ class MainMenuScene() : Scene() {
 					views.gameWindow.close()
 				}
 			}
+			println("Play Buttons text size${playButton.textSize}")
 			
 		}
+		
 		
 		
 	}
