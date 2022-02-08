@@ -12,9 +12,11 @@ class MainMenuScene : Scene() {
 	override suspend fun Container.sceneInit() {
 		var background = SolidRect(views.virtualWidth, views.virtualHeight, Colors["#ffe357c6"])
 		addChild(background)
+		var width = 768.0
+		var height = 96.0
 		container {
 			var playButton = uiButton(512.0, 64.0) {
-				text = "Play"
+				//text = "Play"
 				colorMul = Colors.GREEN
 				
 				position(centerOnStage())
@@ -23,8 +25,9 @@ class MainMenuScene : Scene() {
 					sceneContainer.changeTo<MainGameScene>()
 				}
 			}
+			
 			var exitButton = uiButton(512.0, 64.0) {
-				text = "Exit"
+		
 				colorMul = Colors.RED
 				var x = playButton.x
 				var y = playButton.y
@@ -34,6 +37,16 @@ class MainMenuScene : Scene() {
 					print("User pressed the button Exit")
 					views.gameWindow.close()
 				}
+			}
+			text("Play"){
+				textSize = 50.0
+				centerOn(playButton)
+				
+			}
+			text("Exit"){
+				textSize = 50.0
+				centerOn(exitButton)
+				
 			}
 			
 		}
