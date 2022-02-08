@@ -31,7 +31,7 @@ class MainMenuScene : Scene() {
 				y += 100.0
 				position(x, y)
 				onClick {
-					print("User pressed Exit")
+					print("User pressed the button Exit")
 					views.gameWindow.close()
 				}
 			}
