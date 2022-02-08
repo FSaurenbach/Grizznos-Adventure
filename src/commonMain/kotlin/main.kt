@@ -10,13 +10,14 @@ suspend fun main() = Korge(Korge.Config(module = MainModule))
 
 
 object MainModule : Module() {
-	/** Define the opening scene**/
+	/** Defines the opening scene**/
 	override val mainScene = MainMenuScene::class
 	override val title = "Grizznos Adventure by Schneckedde"
 	override val icon: String = "flat-car.png"
-	override val fullscreen = true
+	override val size: SizeInt = SizeInt(1080 , 1350)
 	
-	/** Add the scenes to the module*/
+	
+	/** Adds the scenes to the module*/
 	override suspend fun AsyncInjector.configure() {
 		mapPrototype { MainMenuScene() }
 		mapPrototype { MainGameScene() }
