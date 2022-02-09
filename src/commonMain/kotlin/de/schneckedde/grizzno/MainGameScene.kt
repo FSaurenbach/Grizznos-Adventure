@@ -38,6 +38,9 @@ class MainGameScene() : Scene() {
 			
 		}
 		
+		/**
+		 * @TODO: Implement a Camera that follows the players position.
+		 */
 		var todd = addTouchGamepad(
 			views.virtualWidth.toDouble(), views.virtualHeight.toDouble(),
 			onStick = { x, y -> af(x, y) },
