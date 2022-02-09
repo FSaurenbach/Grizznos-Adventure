@@ -11,6 +11,7 @@ import de.schneckedde.grizzno.MainGameScene
 import kotlin.math.*
 var pressing = false
 fun Container.addTouchGamepad(
+	mystage:Stage,
 	width: Double = 320.0,
 	height: Double = 224.0,
 	radius: Double = height / 8,
@@ -24,7 +25,7 @@ fun Container.addTouchGamepad(
 	val diameter = radius * 2
 	
 	container {
-		position(radius * 1.1, height - radius * 1.1)
+		position(mystage.views.virtualWidth.toDouble()/2, 1100.0)
 		graphics {
 			fill(Colors["#ff4ad0"]) { circle(0.0, 0.0, radius) }
 			alpha(0.2)
