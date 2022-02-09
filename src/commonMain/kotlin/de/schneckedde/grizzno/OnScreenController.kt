@@ -17,7 +17,6 @@ fun Container.addTouchGamepad(
 	onStick: (x: Double, y: Double) -> Unit = { _, _ -> },
 	onButton: (button: Int, pressed: Boolean) -> Unit = { _, _ -> }
 ) {
-	MainGameScene().pressing = pressing
 	
 	var dragging = false
 	val view = this
@@ -33,36 +32,6 @@ fun Container.addTouchGamepad(
 		ball = graphics {
 			fill(Colors.WHITE) { circle(0.0, 0.0, radius * 0.7) }
 			alpha(0.2)
-		}
-	}
-	
-	fun <T : View> T.decorateButton(button: Int) = this.apply {
-		
-		
-		touch {
-			onDown {
-				pressing = true
-				alpha = 0.3
-				onButton(button, true)
-			}
-			
-			onUpAnywhere {
-				if (pressing) {
-					pressing = false
-					alpha = 0.2
-					onButton(button, false)
-				}
-			}
-		}
-		
-	}
-	
-	for (n in 0 until 2) {
-		graphics {
-			position(width - radius * 1.1 - (diameter * n), height - radius * 1.1)
-			fill(Colors.WHITE) { circle(0.0, 0.0, radius * 0.7) }
-			alpha(0.2)
-			decorateButton(n)
 		}
 	}
 	

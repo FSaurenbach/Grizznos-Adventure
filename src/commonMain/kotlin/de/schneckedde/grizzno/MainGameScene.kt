@@ -6,49 +6,35 @@ package de.schneckedde.grizzno
 
 import addTouchGamepad
 import com.soywiz.korge.scene.Scene
-import com.soywiz.korge.view.Container
-import com.soywiz.korge.view.SolidRect
-import com.soywiz.korge.view.addUpdater
-import com.soywiz.korge.view.position
+import com.soywiz.korge.view.*
+import com.soywiz.korge.view.camera.Camera
 import com.soywiz.korim.color.Colors
+import com.soywiz.korim.format.readBitmap
+import com.soywiz.korio.file.std.resourcesVfs
+import com.soywiz.korma.geom.degrees
 
 class MainGameScene() : Scene() {
 	var pressing = false
 	override suspend fun Container.sceneInit() {
-		/*
-		
-		
-		
-		val car_image = Image(resourcesVfs["flat-car.png"].readBitmap()).position(width, height).registerBodyWithFixture(
-			0.0f, 0.0f, 0.0f,
-			
-			1.0f, 1.0f, 1.0f, friction = 1.0, type = BodyType.KINEMATIC
-		
-		)
-		
-		addChild(rect)
-		addChild(car_image)
-		var mystage = stage
-		if (mystage != null) {
-			InputHandler().move_car(mystage, car_image)
-		} else {
-			throw IllegalArgumentException("var mystage cannot be null")
-		}
-		
-		
-
-	
-		 */
-		
+		var background = SolidRect(views.virtualWidth.toDouble(), views.virtualHeight.toDouble(), Colors["#1f960b"] )
+		addChild(background)
 		var width = views.virtualWidth / 2.0
 		var height = views.virtualHeight / 2.0
-		var rect = SolidRect(60.0, 50.0, Colors.WHITE).position(width, height)
+		
+		var ima = resourcesVfs["Top_Down_Survivor/handgun/idle/survivor-idle_handgun_0.png"].readBitmap()
+		
+		val rect = sprite(ima)
+		
 		addChild(rect)
+		
+		
+		
+		
 		var x1: Double = 0.0
 		var y1: Double = 0.0
 		fun af(x: Double, y: Double) {
-			x1 = x
-			y1 = y
+			x1 = x*1.5
+			y1 = y*1.5
 			
 		}
 		
@@ -60,7 +46,6 @@ class MainGameScene() : Scene() {
 			rect.x += x1
 			rect.y += y1
 		}
-		
 		
 	}
 	
