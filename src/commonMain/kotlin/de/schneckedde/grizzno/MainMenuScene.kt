@@ -54,6 +54,10 @@ class MainMenuScene : Scene() {
 				centerOn(playButton)
 				
 			}
+			text("Credits"){
+				textSize = 50.0
+				centerOn(creditsButton)
+			}
 			text("Exit"){
 				textSize = 50.0
 				centerOn(exitButton)
