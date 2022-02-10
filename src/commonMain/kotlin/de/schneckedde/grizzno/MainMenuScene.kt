@@ -7,6 +7,7 @@ import com.soywiz.korge.scene.Scene
 import com.soywiz.korge.ui.uiButton
 import com.soywiz.korge.view.*
 import com.soywiz.korim.color.Colors
+import com.soywiz.korio.net.URL
 
 class MainMenuScene : Scene() {
 	override suspend fun Container.sceneInit() {
@@ -32,8 +33,7 @@ class MainMenuScene : Scene() {
 				y += 100.0
 				position(x, y)
 				onClick {
-					print("User pressed the button Exit")
-					views.gameWindow.close()
+					"https://github.com/SchneckeddeF/Grizznos-Adventure/blob/main/credits/credits.txt"
 				}
 			}
 			
