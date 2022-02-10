@@ -9,6 +9,7 @@ import com.soywiz.korev.Key
 import com.soywiz.korge.input.keys
 import com.soywiz.korge.scene.Scene
 import com.soywiz.korge.ui.textSize
+import com.soywiz.korge.ui.uiButton
 import com.soywiz.korge.ui.uiText
 import com.soywiz.korge.view.*
 import com.soywiz.korim.color.Colors
@@ -21,7 +22,6 @@ class MainGameScene : Scene() {
 		var mystage = Stage(views)
 		var background = SolidRect(views.virtualWidth.toDouble(), views.virtualHeight.toDouble(), Colors["#1f960b"])
 		addChild(background)
-		
 		var player_sprite = resourcesVfs["Top_Down_Survivor/handgun/idle/survivor-idle_handgun_0.png"].readBitmap()
 		
 		val Player = sprite(player_sprite)
@@ -47,7 +47,7 @@ class MainGameScene : Scene() {
 				onStick = { x, y -> move_player_by_joystick(x, y) },
 			)
 			var meter: Double = 0.0
-			var mm = uiText("0", 500.0, 500.0)
+			var mm = uiText("Meter: 0", 500.0, 500.0)
 			mm.textSize+=60
 			InputHandler().move_player_by_keys(mystage, Player)
 			Player.addUpdater {
@@ -57,7 +57,7 @@ class MainGameScene : Scene() {
 				
 				Player.y += y_joystick
 				meter += y_joystick.absoluteValue
-				mm.text = "${meter.toInt().toString()}"
+				mm.text = "Meter: ${meter.toInt().toString()}"
 				
 			}
 			

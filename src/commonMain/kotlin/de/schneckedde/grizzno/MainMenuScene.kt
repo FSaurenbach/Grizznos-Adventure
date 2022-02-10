@@ -32,9 +32,6 @@ class MainMenuScene : Scene() {
 				var y = playButton.y
 				y += 100.0
 				position(x, y)
-				onClick {
-					"https://github.com/SchneckeddeF/Grizznos-Adventure/blob/main/credits/credits.txt"
-				}
 			}
 			
 			var exitButton = uiButton(512.0, 64.0) {
