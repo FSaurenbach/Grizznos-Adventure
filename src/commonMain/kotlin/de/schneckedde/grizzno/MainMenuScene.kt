@@ -17,7 +17,7 @@ class MainMenuScene : Scene() {
 		var height = 96.0
 		container {
 			var playButton = uiButton(512.0, 64.0) {
-				//text = "Play"
+	
 				colorMul = Colors.GREEN
 				
 				position(centerOnStage())
@@ -42,7 +42,6 @@ class MainMenuScene : Scene() {
 				y += 100.0
 				position(x, y)
 				onClick {
-					print("User pressed the button Exit")
 					views.gameWindow.close()
 				}
 			}
