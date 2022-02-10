@@ -21,7 +21,6 @@ class MainMenuScene : Scene() {
 				
 				position(centerOnStage())
 				onClick {
-					print("User pressed the button Play")
 					sceneContainer.changeTo<MainGameScene>()
 				}
 			}
