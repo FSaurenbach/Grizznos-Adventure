@@ -40,7 +40,7 @@ class MainGameScene : Scene() {
 				
 			}
 			
-			/** @TODO: Implement a Camera that follows the players position.*/
+			
 			var joystick = addTouchGamepad(
 				mystage,
 				views.virtualWidth.toDouble(), views.virtualHeight.toDouble(),
