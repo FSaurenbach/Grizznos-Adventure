@@ -46,17 +46,17 @@ class MainGameScene : Scene() {
 				views.virtualWidth.toDouble(), views.virtualHeight.toDouble(),
 				onStick = { x, y -> move_player_by_joystick(x, y) },
 			)
-			var meter: Int = 0
+			var meter: Double = 0.0
 			var mm = uiText("0", 500.0, 500.0)
 			mm.textSize+=60
 			InputHandler().move_player_by_keys(mystage, Player)
 			Player.addUpdater {
 				Player.x += x_joystick
 				
-				meter += x_joystick.toInt().absoluteValue
+				meter += x_joystick.absoluteValue
 				
 				Player.y += y_joystick
-				meter += y_joystick.toInt().absoluteValue
+				meter += y_joystick.absoluteValue
 				mm.text = "${meter.toString()}"
 			}
 			
