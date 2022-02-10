@@ -23,6 +23,4 @@ jobs:
       run: ./gradlew jvmTest
     - name: Build with JavaScript
       run: ./gradlew jsBrowserProductionWebpack
-    - name: Run Native on Linux
-      run: ./gradlew runNativeRelease
     
