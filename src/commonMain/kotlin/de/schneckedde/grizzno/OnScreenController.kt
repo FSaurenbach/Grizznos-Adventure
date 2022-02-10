@@ -1,17 +1,19 @@
-import com.soywiz.kmem.*
-import com.soywiz.korev.*
-import com.soywiz.korge.baseview.*
-import com.soywiz.korge.component.*
-import com.soywiz.korge.input.*
+import com.soywiz.kmem.clamp
+import com.soywiz.korev.TouchEvent
+import com.soywiz.korge.baseview.BaseView
+import com.soywiz.korge.component.TouchComponent
 import com.soywiz.korge.view.*
-import com.soywiz.korim.color.*
-import com.soywiz.korma.geom.*
-import com.soywiz.korma.geom.vector.*
-import de.schneckedde.grizzno.MainGameScene
-import kotlin.math.*
+import com.soywiz.korim.color.Colors
+import com.soywiz.korma.geom.Angle
+import com.soywiz.korma.geom.Point
+import com.soywiz.korma.geom.cos
+import com.soywiz.korma.geom.sin
+import com.soywiz.korma.geom.vector.circle
+import kotlin.math.hypot
+
 var pressing = false
 fun Container.addTouchGamepad(
-	mystage:Stage,
+	mystage: Stage,
 	width: Double = 320.0,
 	height: Double = 224.0,
 	radius: Double = height / 8,
@@ -25,7 +27,7 @@ fun Container.addTouchGamepad(
 	val diameter = radius * 2
 	
 	container {
-		position(mystage.views.virtualWidth.toDouble()/2, 1100.0)
+		position(mystage.views.virtualWidth.toDouble() / 2, 1600.0)
 		graphics {
 			fill(Colors["#ff4ad0"]) { circle(0.0, 0.0, radius) }
 			alpha(0.2)

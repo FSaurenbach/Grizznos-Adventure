@@ -14,7 +14,7 @@ object MainModule : Module() {
 	/** Defines the opening scene**/
 	override val mainScene = MainMenuScene::class
 	override val title = "Grizznos Adventure by Schneckedde"
-	override val size: SizeInt = SizeInt(1080 , 1350)
+	override val size: SizeInt = SizeInt(1080 , 1920)
 	override val bgcolor = Colors.RED
 	
 	
