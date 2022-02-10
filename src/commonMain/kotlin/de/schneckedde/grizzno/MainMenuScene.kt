@@ -24,12 +24,24 @@ class MainMenuScene : Scene() {
 					sceneContainer.changeTo<MainGameScene>()
 				}
 			}
+			var creditsButton = uiButton(512.0, 64.0) {
+				
+				colorMul = Colors.RED
+				var x = playButton.x
+				var y = playButton.y
+				y += 100.0
+				position(x, y)
+				onClick {
+					print("User pressed the button Exit")
+					views.gameWindow.close()
+				}
+			}
 			
 			var exitButton = uiButton(512.0, 64.0) {
 		
 				colorMul = Colors.RED
-				var x = playButton.x
-				var y = playButton.y
+				var x = creditsButton.x
+				var y = creditsButton.y
 				y += 100.0
 				position(x, y)
 				onClick {

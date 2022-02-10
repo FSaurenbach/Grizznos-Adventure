@@ -57,7 +57,8 @@ class MainGameScene : Scene() {
 				
 				Player.y += y_joystick
 				meter += y_joystick.absoluteValue
-				mm.text = "${meter.toString()}"
+				mm.text = "${meter.toInt().toString()}"
+				
 			}
 			
 		}
