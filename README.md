@@ -2,7 +2,7 @@
 
 
 
-Try it on https://schneckedde.website
+Try it on https://www.schneckedde.website
 
 
 Basic Information:
