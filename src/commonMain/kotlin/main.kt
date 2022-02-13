@@ -1,27 +1,27 @@
-import com.soywiz.klock.*
-import com.soywiz.korge.*
-import com.soywiz.korge.tween.*
-import com.soywiz.korge.view.*
-import com.soywiz.korge.view.tween.moveBy
-import com.soywiz.korge.view.tween.moveTo
-import com.soywiz.korim.color.*
-import com.soywiz.korim.format.*
-import com.soywiz.korio.file.std.*
-import com.soywiz.korma.geom.*
-import com.soywiz.korma.interpolation.*
+import com.soywiz.korge.Korge
+import com.soywiz.korge.scene.Module
+import com.soywiz.korim.color.Colors
+import com.soywiz.korinject.AsyncInjector
+import com.soywiz.korma.geom.SizeInt
+import de.schneckedde.grizzno.MainGameScene
+import de.schneckedde.grizzno.MainMenuScene
+import de.schneckedde.grizzno.OptionsScene
 
-suspend fun main() = Korge(width = 512, height = 512, bgcolor = Colors["#53ae00"]) {
-	val minDegrees = (-16).degrees
-	val maxDegrees = (+16).degrees
+suspend fun main() = Korge(Korge.Config(module = MainModule))
 
-	val image = image(resourcesVfs["car-full.png"].readBitmap()) {
-		rotation = maxDegrees
-		anchor(.5, .5)
-		scale(.4)
-		position(256, 256)
-	}
-	while (true) {
-		image.moveBy(5, 5)
-		println(image.x)
+
+object MainModule : Module() {
+	/** Defines the opening scene**/
+	override val mainScene = MainMenuScene::class
+	override val title = "Grizznos Adventure by Schneckedde"
+	override val size: SizeInt = SizeInt(1080, 1920)
+	override val bgcolor = Colors.RED
+	
+	
+	/** Adds the scenes to the module*/
+	override suspend fun AsyncInjector.configure() {
+		mapPrototype { MainMenuScene() }
+		mapPrototype { MainGameScene() }
+		mapPrototype { OptionsScene() }
 	}
 }

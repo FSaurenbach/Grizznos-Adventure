@@ -21,3 +21,6 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew jvmTest
+    - name: Build with JavaScript
+      run: ./gradlew jsBrowserProductionWebpack
+    
