@@ -8,7 +8,7 @@ import com.soywiz.korge.view.Stage
 import com.soywiz.korge.view.addUpdater
 
 class InputHandler {
-	/**Input handler for the car of "MainGameScene"**/
+	/**Input handler for the Playerof "MainGameScene"**/
 	fun move_player_by_keys(stage: Stage, player_view: Sprite) {
 		/**Acces the "MainGameScene" per stage**/
 		var player = player_view
