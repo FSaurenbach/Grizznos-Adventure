@@ -15,12 +15,16 @@ import com.soywiz.korge.ui.uiButton
 import com.soywiz.korge.ui.uiText
 import com.soywiz.korge.view.*
 import com.soywiz.korge.view.filter.TransitionFilter
+import com.soywiz.korim.format.PNG
 import com.soywiz.korim.format.readBitmap
 import com.soywiz.korio.file.std.resourcesVfs
 import com.soywiz.korma.geom.degrees
 import de.schneckedde.grizzno.InputHandler
 import de.schneckedde.grizzno.addTouchGamepad
 import kotlin.math.absoluteValue
+
+var bul = true
+
 class MainGameScene : Scene() {
 	
 	override suspend fun Container.sceneInit() {
@@ -86,21 +90,38 @@ class MainGameScene : Scene() {
 		var tree = container {
 		
 		}
-		var bullet = Image(resourcesVfs["bullet.png"].readBitmap())
-        tree.addUpdater {if ((stage!!.input.keys.pressing(Key.K))) spawn_bullets(stage, tree, Player, bullet)}
 		
+		var bullet = Image(resourcesVfs["bullet.png"].readBitmap(PNG))
+		var zombie = Image(resourcesVfs["tds_zombie/skeleton-attack_0.png"].readBitmap(PNG))
+		var bul = true
+		tree.addUpdater {
+			if (((stage!!.input.keys.pressing(Key.K))) && bul) spawn_bullets(
+				stage, tree, Player, bullet
+			)
+		}
+		spawn_bots(stage, tree, Player, zombie)
 	}
 	
 	private fun spawn_bullets(stage: Stage?, tree: Container, Player: View, bullet: Image) {
-		bullet.scale = 0.1
-		bullet.rotation = 90.degrees
-		bullet.centerOn(Player)
-		bullet.addUpdater {
-			
-			
-			bullet.x += 2.0
+		
+		if (bul) {
+			bullet.scale = 0.1
+			bullet.rotation = 90.degrees
+			bullet.centerOn(Player)
+			bullet.addUpdater {
+				
+				
+				bullet.x += 2.0
+				
+			}
+			tree.addChild(bullet)
+			bul = false
 			
 		}
-		tree.addChild(bullet)
+	}
+	private fun spawn_bots(stage: Stage?, tree: Container, Player: View, zombie: Image){
+		zombie.centerOnStage()
+		if (zombie.collidesWith(Player)) print("wtf")
+		tree.addChild(zombie)
 	}
 }
