@@ -4,6 +4,7 @@
 
 package scenes
 
+
 import com.soywiz.klock.seconds
 import com.soywiz.korev.Key
 import com.soywiz.korge.input.keys
@@ -19,15 +20,26 @@ import com.soywiz.korim.format.PNG
 import com.soywiz.korim.format.readBitmap
 import com.soywiz.korio.file.std.resourcesVfs
 import com.soywiz.korma.geom.degrees
-import de.schneckedde.grizzno.InputHandler
-import de.schneckedde.grizzno.addTouchGamepad
+import game_logic.movement.InputHandler
+import game_logic.movement.addTouchGamepad
 import kotlin.math.absoluteValue
-
+import kotlin.system.*
 var bul = true
+
 
 class MainGameScene : Scene() {
 	
 	override suspend fun Container.sceneInit() {
+		var numbers: List<Int>
+		val timeInMillis = measureTimeMillis {
+			numbers = buildList {
+				addAll(0..100)
+				shuffle()
+				sortDescending()
+			}
+		}
+		println(numbers.first())
+		println("(The operation took $timeInMillis ms)")
 		var mystage = Stage(views)
 		var background = image(resourcesVfs["background.png"].readBitmap())
 		addChild(background)
@@ -94,10 +106,15 @@ class MainGameScene : Scene() {
 		var bullet = Image(resourcesVfs["bullet.png"].readBitmap(PNG))
 		var zombie = Image(resourcesVfs["tds_zombie/skeleton-attack_0.png"].readBitmap(PNG))
 		var bul = true
+		
 		tree.addUpdater {
-			if (((stage!!.input.keys.pressing(Key.K))) && bul) spawn_bullets(
-				stage, tree, Player, bullet
-			)
+			if (((stage!!.input.keys.pressing(Key.K))) && bul) {
+				
+				spawn_bullets(
+					
+					stage, tree, Player, bullet
+				)
+			}
 		}
 		spawn_bots(stage, tree, Player, zombie)
 	}
@@ -114,12 +131,15 @@ class MainGameScene : Scene() {
 				bullet.x += 2.0
 				
 			}
+			
 			tree.addChild(bullet)
 			bul = false
 			
 		}
 	}
-	private fun spawn_bots(stage: Stage?, tree: Container, Player: View, zombie: Image){
+	
+	private fun spawn_bots(stage: Stage?, tree: Container, Player: View, zombie: Image) {
+		
 		zombie.centerOnStage()
 		if (zombie.collidesWith(Player)) print("wtf")
 		tree.addChild(zombie)

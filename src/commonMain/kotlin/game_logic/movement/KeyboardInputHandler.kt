@@ -1,6 +1,6 @@
 @file:Suppress("FunctionName", "LocalVariableName", "CanBeVal", "CanBeVal", "CanBeVal")
 
-package de.schneckedde.grizzno
+package game_logic.movement
 
 import com.soywiz.korev.Key
 import com.soywiz.korge.view.Sprite

@@ -1,4 +1,4 @@
-package de.schneckedde.grizzno
+package game_logic.movement
 
 import com.soywiz.kmem.clamp
 import com.soywiz.korev.TouchEvent
