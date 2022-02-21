@@ -14,7 +14,7 @@ import com.soywiz.korma.geom.vector.circle
 import kotlin.math.hypot
 
 var pressing = false
-fun Container.addTouchGamepad(
+fun Container.addJoystick(
     mystage: Stage,
     width: Double = 320.0,
     height: Double = 224.0,

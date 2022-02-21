@@ -21,9 +21,11 @@ import com.soywiz.korim.format.readBitmap
 import com.soywiz.korio.file.std.resourcesVfs
 import com.soywiz.korma.geom.degrees
 import game_logic.movement.InputHandler
-import game_logic.movement.addTouchGamepad
+import game_logic.movement.addJoystick
 import kotlin.math.absoluteValue
 import kotlin.system.*
+import java.util.Timer.*
+import kotlin.concurrent.*
 var bul = true
 
 
@@ -82,7 +84,7 @@ class MainGameScene : Scene() {
 			y_joystick = y * 1.7
 		}
 		
-		var joystick = addTouchGamepad(
+		var joystick = addJoystick(
 			mystage,
 			views.virtualWidth.toDouble(), views.virtualHeight.toDouble(),
 		) { x, y -> move_player_by_joystick(x, y) }

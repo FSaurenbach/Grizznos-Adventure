@@ -2,12 +2,13 @@ import com.soywiz.korge.gradle.KorgeGradlePlugin
 import com.soywiz.korge.gradle.korge
 
 plugins {
-	id("org.jetbrains.kotlin.jvm") version "1.6.20-M1"
+	//id("org.jetbrains.kotlin.jvm") version "1.6.20-M1"
 	kotlin("multiplatform") version "1.6.10"
 	`java-library`
 	
+	
 }
-apply(plugin = "org.jetbrains.kotlin.jvm")
+//apply(plugin = "org.jetbrains.kotlin.jvm")
 repositories {
 	mavenCentral()
 }
@@ -18,8 +19,14 @@ sourceSets {
 }
 dependencies {
 	api("junit:junit:4.13.2")
-	implementation("junit:junit:4.13")
-	implementation("org.jetbrains.kotlin:kotlin-stdlib:1.6.10-RC")
+	implementation("junit:junit:4.13.2")
+	implementation("org.jetbrains.kotlin:kotlin-stdlib:1.6.0")
+	implementation("concurrent:concurrent:1.3.4")
+	implementation("org.jetbrains.kotlin:kotlin-stdlib-common:1.6.0")
+	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.0")
+	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.6.0")
+	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0-native-mt")
+	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.6.0-native-mt")
 	
 }
 buildscript {
