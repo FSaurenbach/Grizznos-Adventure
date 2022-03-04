@@ -6,7 +6,6 @@ import com.soywiz.korma.geom.SizeInt
 import scenes.MainGameScene
 import scenes.MainMenuScene
 import scenes.OptionsScene
-
 suspend fun main() = Korge(Korge.Config(module = MainModule))
 
 object MainModule : Module() {

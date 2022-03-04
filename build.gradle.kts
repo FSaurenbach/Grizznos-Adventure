@@ -2,13 +2,12 @@ import com.soywiz.korge.gradle.KorgeGradlePlugin
 import com.soywiz.korge.gradle.korge
 
 plugins {
-	//id("org.jetbrains.kotlin.jvm") version "1.6.20-M1"
+	idea
 	kotlin("multiplatform") version "1.6.10"
 	`java-library`
 	
 	
 }
-//apply(plugin = "org.jetbrains.kotlin.jvm")
 repositories {
 	mavenCentral()
 }
@@ -17,20 +16,9 @@ sourceSets {
 		java.srcDir("src/core/java")
 	}
 }
-dependencies {
-	api("junit:junit:4.13.2")
-	implementation("junit:junit:4.13.2")
-	implementation("org.jetbrains.kotlin:kotlin-stdlib:1.6.0")
-	implementation("concurrent:concurrent:1.3.4")
-	implementation("org.jetbrains.kotlin:kotlin-stdlib-common:1.6.0")
-	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.0")
-	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.6.0")
-	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0-native-mt")
-	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.6.0-native-mt")
-	
-}
+
 buildscript {
-	val korgePluginVersion: String = "2.5.0"
+	val korgePluginVersion: String = "2.6.0"
 	
 	repositories {
 		mavenLocal()
@@ -39,7 +27,6 @@ buildscript {
 		maven { url = uri("https://plugins.gradle.org/m2/") }
 	}
 	dependencies {
-		
 		classpath("com.soywiz.korlibs.korge.plugins:korge-gradle-plugin:$korgePluginVersion")
 	}
 }

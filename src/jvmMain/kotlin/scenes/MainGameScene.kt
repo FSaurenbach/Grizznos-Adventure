@@ -4,7 +4,6 @@
 
 package scenes
 
-
 import com.soywiz.klock.seconds
 import com.soywiz.korev.Key
 import com.soywiz.korge.input.keys
@@ -22,12 +21,11 @@ import com.soywiz.korio.file.std.resourcesVfs
 import com.soywiz.korma.geom.degrees
 import game_logic.movement.InputHandler
 import game_logic.movement.addJoystick
+import kotlin.concurrent.*
 import kotlin.math.absoluteValue
 import kotlin.system.*
-import java.util.Timer.*
-import kotlin.concurrent.*
-var bul = true
 
+var bul = true
 
 class MainGameScene : Scene() {
 	
