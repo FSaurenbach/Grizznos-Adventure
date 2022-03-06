@@ -2,12 +2,9 @@ import com.soywiz.korge.gradle.KorgeGradlePlugin
 import com.soywiz.korge.gradle.korge
 
 plugins {
-	idea
-	kotlin("multiplatform") version "1.6.10"
 	`java-library`
-	
-	
 }
+
 repositories {
 	mavenCentral()
 }
@@ -16,9 +13,8 @@ sourceSets {
 		java.srcDir("src/core/java")
 	}
 }
-
 buildscript {
-	val korgePluginVersion: String = "2.6.0"
+	val korgePluginVersion: String = "2.6.1"
 	
 	repositories {
 		mavenLocal()
