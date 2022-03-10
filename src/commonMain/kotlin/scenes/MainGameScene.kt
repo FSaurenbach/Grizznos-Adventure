@@ -32,24 +32,24 @@ class MainGameScene : Scene() {
 		var move = true
 		var mystage = Stage(views)
 		var background = image(resourcesVfs["background.png"].readBitmap())
-		var myCamera = fixedSizeContainer(width, height) {
-			var camera = container {
-				
-				addChild(background)
-				
-				
-				keys {
-					down(Key.ESCAPE) {
-						sceneContainer.changeTo<MainMenuScene>()
-					}
-					down(Key.H) {
-						background.centerOnStage()
-					}
+		
+		var myCamera = container {
+			
+			addChild(background)
+			
+			
+			keys {
+				down(Key.ESCAPE) {
+					sceneContainer.changeTo<MainMenuScene>()
 				}
-				
-				
+				down(Key.H) {
+					background.centerOnStage()
+				}
 			}
+			
+			
 		}
+		
 		var x_joystick = 0.0
 		var y_joystick = 0.0
 		
@@ -57,10 +57,6 @@ class MainGameScene : Scene() {
 		var meters_text = uiText("Score: 0") {
 			textSize = 70.0
 		}.centerXOnStage()
-		var tree = container {
-			
-		}
-		
 		
 		
 		var player_sprite = resourcesVfs["Top_Down_Survivor/handgun/idle/survivor-idle_handgun_0.png"].readBitmap()
@@ -91,16 +87,18 @@ class MainGameScene : Scene() {
 		addChild(Player)
 		InputHandler().move_player_by_keys(stage, Player)
 		fun move_player_by_joystick(x: Double, y: Double) {
-			Player.addUpdater { if (move) {
-				x_joystick = x * 1.7
-				y_joystick = y * 1.7
+			Player.addUpdater {
+				if (move) {
+					x_joystick = x * 1.7
+					y_joystick = y * 1.7
+				} else {
+					x_joystick = 0.0
+					y_joystick = 0.0
+				}
 			}
-			else{
-				x_joystick = 0.0
-				y_joystick = 0.0
-			} }
 			
 		}
+		
 		var joystick = addJoystick(
 			mystage,
 			views.virtualWidth.toDouble(), views.virtualHeight.toDouble(),
@@ -123,19 +121,11 @@ class MainGameScene : Scene() {
 			
 			
 		}
+		spawn_bots(mystage, myCamera, Player, zombie, bullet)
+		
 		myCamera.addUpdater {
 			myCamera.pos = center - Player.pos
 		}
-		tree.addUpdater {
-			if (((stage!!.input.keys.pressing(Key.K))) && bul) {
-				
-				spawn_bullets(
-					
-					stage, tree, Player, bullet
-				)
-			}
-		}
-		spawn_bots(stage, tree, Player, zombie, bullet)
 		
 	}
 	
@@ -170,5 +160,6 @@ private fun spawn_bots(stage: Stage?, tree: Container, Player: View, zombie: Ima
 			removeFromParent()
 		}
 	}
+	print("smth")
 	tree.addChild(zombie)
 }
