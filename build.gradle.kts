@@ -1,6 +1,7 @@
 import com.soywiz.korge.gradle.KorgeGradlePlugin
 import com.soywiz.korge.gradle.korge
 import com.soywiz.korge.gradle.Orientation
+
 plugins {
 	`java-library`
 }

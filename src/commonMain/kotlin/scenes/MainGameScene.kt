@@ -10,6 +10,7 @@ import com.soywiz.korge.input.keys
 import com.soywiz.korge.input.onClick
 import com.soywiz.korge.scene.MaskTransition
 import com.soywiz.korge.scene.Scene
+import com.soywiz.korge.ui.UIText
 import com.soywiz.korge.ui.textSize
 import com.soywiz.korge.ui.uiButton
 import com.soywiz.korge.ui.uiText
@@ -17,19 +18,24 @@ import com.soywiz.korge.view.*
 import com.soywiz.korge.view.filter.TransitionFilter
 import com.soywiz.korim.format.PNG
 import com.soywiz.korim.format.readBitmap
+import com.soywiz.korio.dynamic.KDynamic.Companion.toDouble
+import com.soywiz.korio.dynamic.KDynamic.Companion.toInt
 import com.soywiz.korio.file.std.resourcesVfs
 import com.soywiz.korma.geom.Point
 import com.soywiz.korma.geom.degrees
 import game_logic.movement.InputHandler
 import game_logic.movement.addJoystick
+import kotlin.properties.Delegates
 
 
 var bul = 0
-var myscore: Int = 0
+var myscore by Delegates.notNull<Int>()
+
 class MainGameScene : Scene() {
 	
 	override suspend fun Container.sceneInit() {
-		
+		var score_file = (resourcesVfs["score.txt"])
+		myscore = score_file.readString().toInt()
 		var player_sprite = resourcesVfs["Top_Down_Survivor/handgun/idle/survivor-idle_handgun_0.png"].readBitmap()
 		
 		var bullet = Image(resourcesVfs["bullet.png"].readBitmap(PNG))
@@ -45,6 +51,7 @@ class MainGameScene : Scene() {
 			
 			keys {
 				down(Key.ESCAPE) {
+					
 					sceneContainer.changeTo<MainMenuScene>()
 				}
 				down(Key.H) {
@@ -58,8 +65,8 @@ class MainGameScene : Scene() {
 		var x_joystick = 0.0
 		var y_joystick = 0.0
 		
-	
-		var score_text = uiText("Score: 0") {
+		
+		var score_text = uiText("Score: ${resourcesVfs["score.txt"].readString()}") {
 			textSize = 70.0
 		}.centerXOnStage()
 		
@@ -120,7 +127,6 @@ class MainGameScene : Scene() {
 		score_text.addUpdater {
 			score_text.text = "Score: $myscore"
 		}
-		
 		val center = Point(width / 2, height / 2)
 		keys {
 			down(Key.K) {
@@ -128,10 +134,25 @@ class MainGameScene : Scene() {
 				println("Bullet shot")
 			}
 		}
-		
+		keys {
+			down(Key.ESCAPE) {
+				writeScore(score_text)
+				
+				sceneContainer.changeTo<MainMenuScene>()
+			}
+		}
 		myCamera.addUpdater {
 			myCamera.pos = center-Player.pos
 		}
+		
+	}
+	
+	suspend fun writeScore(score_text: UIText) {
+		var score_file = (resourcesVfs["score.txt"])
+		var scores = score_file.readString().toInt()
+		scores+= myscore
+		print(scores)
+		score_file.writeLines(listOf(scores.toString()))
 		
 	}
 	
@@ -172,7 +193,7 @@ private fun spawn_zombies(stage: Stage?, tree: Container, Player: Image, zombie:
 	zombie.position(x, y)
 	zombie.addUpdater {
 		if (zombie.collidesWith(bullet)) {
-			myscore+10
+			myscore+=10
 			println(myscore)
 			removeFromParent()
 			
