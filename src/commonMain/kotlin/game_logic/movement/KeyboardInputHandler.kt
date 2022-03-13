@@ -3,14 +3,14 @@
 package game_logic.movement
 
 import com.soywiz.korev.Key
-import com.soywiz.korge.view.Sprite
+import com.soywiz.korge.view.Image
 import com.soywiz.korge.view.Stage
 import com.soywiz.korge.view.addUpdater
 
 class InputHandler {
     
     /**Input handler for the car of "MainGameScene"**/
-    suspend fun move_player_by_keys(stage: Stage?, player_view: Sprite) {
+    suspend fun move_player_by_keys(stage: Stage?, player_view: Image) {
         /**Acces the "MainGameScene" per stage**/
         var player = player_view
         player.addUpdater {

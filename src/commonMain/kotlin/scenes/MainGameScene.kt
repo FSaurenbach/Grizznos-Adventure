@@ -22,21 +22,26 @@ import com.soywiz.korma.geom.Point
 import com.soywiz.korma.geom.degrees
 import game_logic.movement.InputHandler
 import game_logic.movement.addJoystick
-import kotlin.math.absoluteValue
 
-var bul = true
 
+var bul = 0
+var myscore: Int = 0
 class MainGameScene : Scene() {
 	
 	override suspend fun Container.sceneInit() {
+		
+		var player_sprite = resourcesVfs["Top_Down_Survivor/handgun/idle/survivor-idle_handgun_0.png"].readBitmap()
+		
+		var bullet = Image(resourcesVfs["bullet.png"].readBitmap(PNG))
+		var zombie = Image(resourcesVfs["tds_zombie/skeleton-attack_0.png"].readBitmap(PNG))
+		
 		var move = true
 		var mystage = Stage(views)
 		var background = image(resourcesVfs["background.png"].readBitmap())
 		
-		var myCamera = container {
+		var myCamera = container{
 			
 			addChild(background)
-			
 			
 			keys {
 				down(Key.ESCAPE) {
@@ -47,23 +52,18 @@ class MainGameScene : Scene() {
 				}
 			}
 			
-			
 		}
-		
+		val Player = Image(resourcesVfs["Top_Down_Survivor/handgun/idle/survivor-idle_handgun_0.png"].readBitmap())
+		spawn_zombies(stage, myCamera, Player, zombie, bullet, 25.0,23.0)
 		var x_joystick = 0.0
 		var y_joystick = 0.0
 		
-		var meters: Double = 0.0
-		var meters_text = uiText("Score: 0") {
+	
+		var score_text = uiText("Score: 0") {
 			textSize = 70.0
 		}.centerXOnStage()
 		
 		
-		var player_sprite = resourcesVfs["Top_Down_Survivor/handgun/idle/survivor-idle_handgun_0.png"].readBitmap()
-		
-		var bullet = Image(resourcesVfs["bullet.png"].readBitmap(PNG))
-		var zombie = Image(resourcesVfs["tds_zombie/skeleton-attack_0.png"].readBitmap(PNG))
-		var bul = true
 		var game_mode_switcher = container {
 			var main_game_button = uiButton(300.0, 150.0) {}.position(views.virtualWidthDouble / 2.0, 1750.0).onClick {
 				sceneContainer.changeTo<MainGameScene>(
@@ -83,7 +83,6 @@ class MainGameScene : Scene() {
 		addChild(game_mode_switcher)
 		zombie.centerOnStage()
 		
-		val Player = sprite(player_sprite)
 		addChild(Player)
 		InputHandler().move_player_by_keys(stage, Player)
 		fun move_player_by_joystick(x: Double, y: Double) {
@@ -105,7 +104,6 @@ class MainGameScene : Scene() {
 		) { x, y -> move_player_by_joystick(x, y) }
 		
 		
-		val center = Point(width / 2, height / 2)
 		myCamera.centerOnStage()
 		Player.centerOnStage()
 		Player.addUpdater {
@@ -113,18 +111,26 @@ class MainGameScene : Scene() {
 			move = Player.collidesWith(background)
 			Player.x += x_joystick
 			
-			meters += x_joystick.absoluteValue
 			
 			Player.y += y_joystick
-			meters += y_joystick.absoluteValue
-			meters_text.text = "Score: ${meters.toInt()}"
+			
 			
 			
 		}
-		spawn_bots(mystage, myCamera, Player, zombie, bullet)
+		score_text.addUpdater {
+			score_text.text = "Score: $myscore"
+		}
+		
+		val center = Point(width / 2, height / 2)
+		keys {
+			down(Key.K) {
+				spawn_bullets(myCamera, Player, bullet)
+				println("Bullet shot")
+			}
+		}
 		
 		myCamera.addUpdater {
-			myCamera.pos = center - Player.pos
+			myCamera.pos = center-Player.pos
 		}
 		
 	}
@@ -133,33 +139,46 @@ class MainGameScene : Scene() {
 }
 
 
-private fun spawn_bullets(stage: Stage?, tree: Container, Player: View, bullet: Image) {
-	bullet.centerOn(Player)
-	if (bul) {
+private fun spawn_bullets(tree: Container, Player: View, bullet: Image) {
+	
+	if (bul <= 5) {
+		bullet.centerOn(Player)
+		tree.addChild(bullet)
+		
 		bullet.scale = 0.1
 		bullet.rotation = 90.degrees
 		
+		print(tree.width)
+		
+		print(tree.height)
 		bullet.addUpdater {
 			
 			
 			bullet.x += 2.0
-			
+			if (bullet.collidesWith(tree)) {
+				
+				/*
+				print("removed")
+				removeAllComponents()*/
+			}
 		}
 		
-		tree.addChild(bullet)
-		bul = false
+		bul++
 		
 	}
 }
 
-private fun spawn_bots(stage: Stage?, tree: Container, Player: View, zombie: Image, bullet: Image) {
-	
-	zombie.centerOnStage()
+private fun spawn_zombies(stage: Stage?, tree: Container, Player: Image, zombie: Image, bullet: Image, x:Double, y:Double) {
+	zombie.position(x, y)
 	zombie.addUpdater {
 		if (zombie.collidesWith(bullet)) {
+			myscore+10
+			println(myscore)
 			removeFromParent()
+			
 		}
 	}
 	print("smth")
+	zombie_ai().move_zombie(zombie, Player)
 	tree.addChild(zombie)
 }
