@@ -20,6 +20,7 @@ import com.soywiz.korim.format.PNG
 import com.soywiz.korim.format.readBitmap
 import com.soywiz.korio.file.std.resourcesVfs
 import com.soywiz.korma.geom.Point
+import com.soywiz.korma.geom.degrees
 import game_logic.movement.InputHandler
 import game_logic.movement.addJoystick
 
@@ -47,9 +48,9 @@ class MainGameScene : Scene() {
 			}
 		}
 		val Player = Image(resourcesVfs["Top_Down_Survivor/handgun/idle/survivor-idle_handgun_0.png"].readBitmap())
-		for (i in 1..900) {
-			spawn_zombies(myCamera, Player, zombie, bullet)
-		}
+
+		spawn_zombies(myCamera, Player, zombie, bullet)
+
 		var x_joystick = 0.0
 		var y_joystick = 0.0
 		
@@ -100,6 +101,11 @@ class MainGameScene : Scene() {
 				
 				sceneContainer.changeTo<MainMenuScene>()
 			}
+			down(Key.K) {
+
+				spawn_bullets(myCamera, Player, bullet)
+				spawn_zombies(myCamera, Player, zombie, bullet)
+			}
 		}
 		myCamera.addUpdater {
 			myCamera.pos = center - Player.pos
@@ -110,31 +116,29 @@ class MainGameScene : Scene() {
 	
 }
 
-/*
 private fun spawn_bullets(tree: Container, Player: View, bullet: Image) {
-	
+
 	if (bul <= 5) {
 		bullet.centerOn(Player)
 		tree.addChild(bullet)
-		
+
 		bullet.scale = 0.1
 		bullet.rotation = 90.degrees
-		
+
 		print(tree.width)
-		
+
 		print(tree.height)
 		bullet.addUpdater {
-			
-			
-			bullet.x += 2.0
-			
-		}
-		
-		bul++
-		
-	}
-}*/
 
+
+			bullet.x += 2.0
+
+		}
+
+		bul++
+
+	}
+}
 private fun spawn_zombies(
 	tree: Container,
 	Player: Image,
