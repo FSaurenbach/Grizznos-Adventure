@@ -70,8 +70,6 @@ class MainGameScene : Scene() {
 			textSize = 70.0
 		}.centerXOnStage()
 		
-		
-		addChild(game_mode_switcher)
 		zombie.centerOnStage()
 		
 		addChild(Player)
