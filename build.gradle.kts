@@ -2,6 +2,9 @@ import com.soywiz.korge.gradle.KorgeGradlePlugin
 import com.soywiz.korge.gradle.korge
 import com.soywiz.korge.gradle.Orientation
 
+dependencies {
+	implementation("org.junit.jupiter:junit-jupiter:5.8.1")
+}
 plugins {
 	`java-library`
 }
