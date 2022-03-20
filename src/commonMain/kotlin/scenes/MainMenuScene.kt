@@ -2,16 +2,26 @@
 
 package scenes
 
+import com.soywiz.klock.seconds
+import com.soywiz.korev.Key
+import com.soywiz.korge.input.keys
 import com.soywiz.korge.input.onClick
+import com.soywiz.korge.scene.MaskTransition
 import com.soywiz.korge.scene.Scene
 import com.soywiz.korge.ui.uiButton
 import com.soywiz.korge.view.*
+import com.soywiz.korge.view.camera.cameraContainer
+import com.soywiz.korge.view.filter.TransitionFilter
 import com.soywiz.korim.color.Colors
+import game_logic.myfuncs.man
 
 class MainMenuScene : Scene() {
 	override suspend fun Container.sceneInit() {
 		var background = SolidRect(views.virtualWidth, views.virtualHeight, Colors["#ffe357c6"])
 		addChild(background)
+		keys{
+			down(Key.ESCAPE){ man("Exit")}
+		}
 		container {
 			var playButton = uiButton(512.0, 64.0) {
 				
@@ -19,7 +29,7 @@ class MainMenuScene : Scene() {
 				
 				position(centerOnStage())
 				onClick {
-					sceneContainer.pushTo<MainGameScene>()
+					sceneContainer.pushTo<MainGameScene>(0.5.seconds, transition = MaskTransition(transition = TransitionFilter.Transition.DIAGONAL1, smooth = true))
 				}
 			}
 			var exitButton = uiButton(512.0, 64.0) {
