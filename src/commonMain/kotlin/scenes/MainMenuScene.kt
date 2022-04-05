@@ -53,9 +53,13 @@ class MainMenuScene : Scene() {
 					views.gameWindow.close()
 				}
 			}
-			text("Play") {
+			text("Shooting Game") {
 				textSize = 50.0
-				centerOn(playButton)
+				centerOn(playButtonGame1)
+			}
+			text("Tank Game") {
+				textSize = 50.0
+				centerOn(playButtonGame2)
 			}
 			text("Exit") {
 				textSize = 50.0
