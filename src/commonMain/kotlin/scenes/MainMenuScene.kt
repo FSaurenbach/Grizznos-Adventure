@@ -23,20 +23,30 @@ class MainMenuScene : Scene() {
 			down(Key.ESCAPE){ man("Exit")}
 		}
 		container {
-			var playButton = uiButton(512.0, 64.0) {
+			var playButtonGame1 = uiButton(512.0, 64.0) {
 				
 				colorMul = Colors.GREEN
 				
 				position(centerOnStage())
 				onClick {
-					sceneContainer.pushTo<MainGameScene>(0.5.seconds, transition = MaskTransition(transition = TransitionFilter.Transition.DIAGONAL1, smooth = true))
+					sceneContainer.pushTo<MainGameScene>(0.5.seconds, transition = MaskTransition(transition = TransitionFilter.Transition.DIAGONAL2, smooth = true))
+				}
+			}
+			var playButtonGame2 = uiButton(512.0, 64.0) {
+				
+				colorMul = Colors.GREEN
+				var x = playButtonGame1.x
+				var y = playButtonGame1.y
+				y += 100.0
+				onClick {
+					sceneContainer.pushTo<MainGameScene>(0.5.seconds, transition = MaskTransition(transition = TransitionFilter.Transition.DIAGONAL2, smooth = true))
 				}
 			}
 			var exitButton = uiButton(512.0, 64.0) {
 				
 				colorMul = Colors.RED
-				var x = playButton.x
-				var y = playButton.y
+				var x = playButtonGame2.x
+				var y = playButtonGame2.y
 				y += 100.0
 				position(x, y)
 				onClick {
