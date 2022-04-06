@@ -1,3 +1,4 @@
+
 @file:Suppress("CanBeVal", "CanBeVal", "CanBeVal")
 
 package scenes
@@ -13,14 +14,13 @@ import com.soywiz.korge.view.*
 import com.soywiz.korge.view.camera.cameraContainer
 import com.soywiz.korge.view.filter.TransitionFilter
 import com.soywiz.korim.color.Colors
-import game_logic.myfuncs.man
 
 class MainMenuScene : Scene() {
 	override suspend fun Container.sceneInit() {
 		var background = SolidRect(views.virtualWidth, views.virtualHeight, Colors["#ffe357c6"])
 		addChild(background)
 		keys{
-			down(Key.ESCAPE){ man("Exit")}
+			views.gameWindow.exit()
 		}
 		container {
 			var playButtonGame1 = uiButton(512.0, 64.0) {
@@ -39,7 +39,11 @@ class MainMenuScene : Scene() {
 				var y = playButtonGame1.y
 				y += 100.0
 				onClick {
+					<<<<<<< HEAD
+					sceneContainer.pushTo<TankGame>(0.5.seconds, transition = MaskTransition(transition = TransitionFilter.Transition.DIAGONAL2, smooth = true))
+					=======
 					sceneContainer.pushTo<MainGameScene>(0.5.seconds, transition = MaskTransition(transition = TransitionFilter.Transition.DIAGONAL2, smooth = true))
+					>>>>>>> d1c883711d592472a493de6652bedd3480665ebb
 				}
 			}
 			var exitButton = uiButton(512.0, 64.0) {
