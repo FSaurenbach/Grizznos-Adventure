@@ -1,7 +1,6 @@
 package game_logic.myfuncs
 
 
-import com.soywiz.korge.view.Container
 import com.soywiz.korge.view.View
 import com.soywiz.korge.view.addUpdater
 import com.soywiz.korge.view.position
@@ -16,4 +15,5 @@ fun View.follow(view: View) {
     this.addUpdater {
         this.pos = Point(width / 2, height / 2) - view.pos
     }
+
 }

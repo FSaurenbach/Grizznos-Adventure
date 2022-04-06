@@ -2,9 +2,6 @@ import com.soywiz.korge.gradle.KorgeGradlePlugin
 import com.soywiz.korge.gradle.korge
 import com.soywiz.korge.gradle.Orientation
 
-dependencies {
-	implementation("org.junit.jupiter:junit-jupiter:5.8.1")
-}
 plugins {
 	`java-library`
 }
@@ -18,7 +15,7 @@ sourceSets {
 	}
 }
 buildscript {
-	val korgePluginVersion: String = "2.6.2"
+	val korgePluginVersion: String = "2.6.3"
 	
 	repositories {
 		mavenLocal()
