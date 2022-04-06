@@ -16,7 +16,7 @@ object MainModule : Module() {
 	override val quality = GameWindow.Quality.QUALITY
 
 	//override val mainScene = MainMenuScene::class
-	override val mainScene = TankGame::class
+	override val mainScene = MainMenuScene::class
 	override val title = "Grizznos Adventure by Schneckedde"
 	override val size: SizeInt = SizeInt(1920, 1080)
 	
