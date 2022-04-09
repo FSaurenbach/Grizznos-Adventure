@@ -4,6 +4,8 @@ package game_logic.myfuncs
 import com.soywiz.korge.view.View
 import com.soywiz.korge.view.addUpdater
 import com.soywiz.korge.view.position
+import com.soywiz.korim.format.readBitmap
+import com.soywiz.korio.file.std.resourcesVfs
 import com.soywiz.korma.geom.Point
 import kotlin.random.Random
 
@@ -17,3 +19,4 @@ fun View.follow(view: View) {
     }
 
 }
+suspend fun bitmap(path: String) = resourcesVfs[path].readBitmap()

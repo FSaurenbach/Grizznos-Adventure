@@ -54,9 +54,7 @@ class MainGameScene : Scene() {
 		var y_joystick = 0.0
 		
 		
-		var score_text = uiText("Score: ${resourcesVfs["score.txt"].readString()}") {
-			textSize = 70.0
-		}.centerXOnStage()
+		
 		
 		addChild(Player)
 		InputHandler().move_view_by_keys(stage, Player)
@@ -78,9 +76,6 @@ class MainGameScene : Scene() {
 		
 		myCamera.centerOnStage()
 		Player.centerOnStage()
-		score_text.addUpdater {
-			score_text.text = "Score: $myscore"
-		}
 		keys {
 			down(Key.ESCAPE) {
 				

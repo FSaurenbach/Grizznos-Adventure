@@ -9,26 +9,33 @@ import com.soywiz.korge.input.keys
 import com.soywiz.korge.input.onClick
 import com.soywiz.korge.scene.MaskTransition
 import com.soywiz.korge.scene.Scene
-import com.soywiz.korge.ui.UISkin
-import com.soywiz.korge.ui.textSize
-import com.soywiz.korge.ui.uiButton
-import com.soywiz.korge.ui.uiSkin
+import com.soywiz.korge.ui.*
 import com.soywiz.korge.view.*
 import com.soywiz.korge.view.filter.TransitionFilter
+import com.soywiz.korge.view.tiles.BaseTileMap
+import com.soywiz.korge.view.tiles.TileSet
+import com.soywiz.korge.view.tiles.tileMap
+import com.soywiz.korim.bitmap.Bitmap32
+import com.soywiz.korim.bitmap.slice
 import com.soywiz.korim.color.Colors
+import com.soywiz.korim.format.readBitmapSlice
+import com.soywiz.korio.file.std.resourcesVfs
+import game_logic.myfuncs.bitmap
 
 class MainMenuScene : Scene() {
 	override suspend fun Container.sceneInit() {
 		var background = SolidRect(views.virtualWidth, views.virtualHeight, Colors["#ffe357c6"])
+		
 		addChild(background)
 		keys{
 			 down(Key.ESCAPE){views.gameWindow.exit()}
 		}
 		container {
 			var ShootingGameButton = uiButton(512.0, 64.0, "ShootingGame") {
-				uiSkin = UISkin{
+				/*uiSkin = UISkin{
 					textSize = 50.0
-				}
+				}*/
+				realUiSkin.textSize = 50.0
 				colorMul = Colors.GREEN
 				
 				onClick {
