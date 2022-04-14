@@ -3,46 +3,53 @@ package scenes
 import com.soywiz.klock.milliseconds
 import com.soywiz.klock.seconds
 import com.soywiz.kmem.clamp
-import com.soywiz.korge.input.draggable
 import com.soywiz.korge.scene.Scene
 import com.soywiz.korge.view.*
 import com.soywiz.korim.bitmap.BmpSlice
 import com.soywiz.korim.color.Colors
-import com.soywiz.korim.format.readBitmap
 import com.soywiz.korim.format.readBitmapSlice
 import com.soywiz.korio.file.std.resourcesVfs
 import game_logic.movement.addJoystick
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import kotlin.math.pow
+
 
 class TankGame : Scene() {
 	override suspend fun Container.sceneInit() {
+		var speed = 1.5
 		var xJoystick = 0.0
 		var yJoystick = 0.0
-		var speed =1.5
+		
+		
 		val camera = camera {
 		
 			
-			
 		}
-		var sand = roundRect(2000.0,2000.0,0.5, fill = Colors["#ffd02f"])
+		var sand = roundRect(2000.0, 2000.0, 0.5, fill = Colors["#ffd02f"])
 		camera.addChild(sand)
-		val playerAnimation = SpriteAnimation(listOf<BmpSlice>(
-			resourcesVfs["tank/idle.png"].readBitmapSlice(),
-			resourcesVfs["tank/move_1.png"].readBitmapSlice(),
-			resourcesVfs["tank/move_2.png"].readBitmapSlice(),
-			resourcesVfs["tank/move_3.png"].readBitmapSlice(),
-			resourcesVfs["tank/move_4.png"].readBitmapSlice(),
-			resourcesVfs["tank/move_5.png"].readBitmapSlice(),
-		), 0.1.seconds)
+		val playerAnimation = SpriteAnimation(
+			listOf<BmpSlice>(
+				resourcesVfs["tank/idle.png"].readBitmapSlice(),
+				resourcesVfs["tank/move_1.png"].readBitmapSlice(),
+				resourcesVfs["tank/move_2.png"].readBitmapSlice(),
+				resourcesVfs["tank/move_3.png"].readBitmapSlice(),
+				resourcesVfs["tank/move_4.png"].readBitmapSlice(),
+				resourcesVfs["tank/move_5.png"].readBitmapSlice(),
+			), 0.1.seconds
+		)
 		
-		val tank = Sprite(resourcesVfs["tank/idle.png"].readBitmapSlice() ).centerOn(camera).addTo(this)
+		val tank = Sprite(resourcesVfs["tank/idle.png"].readBitmapSlice()).centerOn(camera).addTo(this)
 		tank.smoothing = false
 		tank.scale = 4.0
 		tank.playAnimationLooped(spriteAnimation = playerAnimation)
 		addUpdater {
-			speed = if (tank.collidesWith(sand)){
+			
+			
+			speed = if (tank.collidesWith(sand)) {
 				0.2
-			} else{
+			} else {
 				1.5
 			}
 		}
@@ -57,6 +64,7 @@ class TankGame : Scene() {
 			}
 			
 		}
+		
 		var joystick = addJoystick(
 			stage!!,
 			views.virtualWidthDouble, views.virtualHeightDouble,
@@ -67,8 +75,8 @@ class TankGame : Scene() {
 			dx = dx.clamp(-10.0, +10.0)
 			dy = dy.clamp(-10.0, +10.0)
 			
-			camera.x += (dx * scale)*speed
-			camera.y += (dy * scale)*speed
+			camera.x += (dx * scale) * speed
+			camera.y += (dy * scale) * speed
 			dx *= 0.9.pow(scale)
 			dy *= 0.9.pow(scale)
 		}

@@ -41,6 +41,6 @@ korge {
 	authorName = "Ferdinand Saurenbach"
 	authorEmail = "ferdi.saurenbach@gmail.com"
 	androidSdk(compileSdk = 30, minSdk = 20, targetSdk = 30)
-	
+	serializationJson()
 	targetAll()
 }
