@@ -10,11 +10,7 @@ import com.soywiz.korim.color.Colors
 import com.soywiz.korim.format.readBitmapSlice
 import com.soywiz.korio.file.std.resourcesVfs
 import game_logic.movement.addJoystick
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 import kotlin.math.pow
-
 
 class TankGame : Scene() {
 	override suspend fun Container.sceneInit() {
@@ -27,8 +23,10 @@ class TankGame : Scene() {
 		
 			
 		}
+		
 		var sand = roundRect(2000.0, 2000.0, 0.5, fill = Colors["#ffd02f"])
 		camera.addChild(sand)
+		
 		val playerAnimation = SpriteAnimation(
 			listOf<BmpSlice>(
 				resourcesVfs["tank/idle.png"].readBitmapSlice(),
@@ -83,4 +81,5 @@ class TankGame : Scene() {
 		
 		
 	}
+	
 }

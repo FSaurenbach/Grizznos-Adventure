@@ -8,7 +8,6 @@ import scenes.*
 suspend fun main() = Korge(Korge.Config(module = MainModule))
 
 object MainModule : Module() {
-	var DEVELEPOMENT_MODE = true
 	/** Defines the opening scene**/
 	override val quality = GameWindow.Quality.QUALITY
 
