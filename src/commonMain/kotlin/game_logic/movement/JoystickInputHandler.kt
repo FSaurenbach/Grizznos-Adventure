@@ -12,8 +12,10 @@ import com.soywiz.korma.geom.cos
 import com.soywiz.korma.geom.sin
 import com.soywiz.korma.geom.vector.circle
 import kotlin.math.hypot
+
 var JoyBallPosition:Point = Point(0.0,0.0)
 var pressing = false
+
 fun Container.addJoystick(
     stage: Stage,
     width: Double = 320.0,

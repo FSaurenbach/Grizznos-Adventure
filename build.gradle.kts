@@ -37,7 +37,7 @@ korge {
 	id = "de.schneckedde.grizzno"
 	name = "Grizznos Adventure"
 	
-	orientation = Orientation.PORTRAIT
+	orientation = Orientation.LANDSCAPE
 	authorName = "Ferdinand Saurenbach"
 	authorEmail = "ferdi.saurenbach@gmail.com"
 	androidSdk(compileSdk = 30, minSdk = 20, targetSdk = 30)

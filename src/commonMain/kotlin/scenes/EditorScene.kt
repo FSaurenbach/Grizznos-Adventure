@@ -3,61 +3,54 @@
 )
 package scenes
 
-import com.soywiz.korev.Key
+import com.soywiz.klock.seconds
 import com.soywiz.korge.input.draggable
-import com.soywiz.korge.input.keys
-import com.soywiz.korge.input.onMove
+import com.soywiz.korge.input.onClick
 import com.soywiz.korge.scene.Scene
-import com.soywiz.korge.view.Container
-import com.soywiz.korge.view.container
-import com.soywiz.korge.view.roundRect
+import com.soywiz.korge.ui.uiButton
+import com.soywiz.korge.view.*
 import com.soywiz.korim.color.Colors
-import com.soywiz.korio.file.std.resourcesVfs
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 
 @Serializable
 data class PlayerPos(
-	var posX: Double,
-	var posY: Double
+	var posX: Double, var posY: Double
 
 )
 
-class EditorScene() : Scene() {
+class EditorScene : Scene() {
 	override suspend fun Container.sceneInit() {
+		print("sceneInit")
+		var d1 = roundRect(100, 100, 5, fill = Colors.RED)
+		d1.name = "grid"
+		var d2 = roundRect(100, 100, 5, fill = Colors.RED).alignLeftToRightOf(d1)
+		d2.name = "grid"
+		var d3 = roundRect(100, 100, 5, fill = Colors.RED).alignLeftToRightOf(d2)
+		d3.name = "grid"
+		var d4 = roundRect(100, 100, 5, fill = Colors.RED).alignLeftToRightOf(d3)
+		d4.name = "grid"
+		var d5 = roundRect(100, 100, 5, fill = Colors.RED).alignLeftToRightOf(d4)
+		d5.name = "grid"
+		var d6 = roundRect(100, 100, 5, fill = Colors.RED).alignLeftToRightOf(d5)
+		d6.name = "grid"
 		
-		var PlayerPos = PlayerPos(0.0, 0.0)
-		var le = container {
-			var d = roundRect(100, 100, 5, fill = Colors.RED).draggable {}
-			var d2 = roundRect(100, 100, 5, fill = Colors.RED).draggable {}
-			var d3 = roundRect(100, 100, 5, fill = Colors.RED).draggable {}
-			var d4 = roundRect(100, 100, 5, fill = Colors.RED).draggable {}
-			var d5 = roundRect(100, 100, 5, fill = Colors.RED).draggable {}
-			var d6 = roundRect(100, 100, 5, fill = Colors.RED).draggable {}
+		PlayerPos(0.0, 0.0)
+		var d = roundRect(50, 50, 5, fill = Colors.WHITE).draggable {}
+		d.onCollision(filter = { view -> view.name == "grid" }) {
+			this.centerOn(it)
 		}
-		var json = Json {
-			prettyPrint = true
+		var dd = roundRect(50, 50, 5, fill = Colors.WHITE).draggable {}
+		dd.onCollision(filter = { view -> view.name == "grid" }) {
+			this.centerOn(it)
 		}
-		keys {
-			down(Key.K) {
-				var vfs = resourcesVfs["editor.json"]
-				var sting = vfs.readString()
-				var jsons = json.decodeFromString<PlayerPos>(sting)
-				le.children[0].x = jsons.posX
-				le.children[0].y = jsons.posY
-			}
+		var ddd = roundRect(50, 50, 5, fill = Colors.WHITE).draggable {}
+		ddd.onCollision(filter = { view -> view.name == "grid" }) {
+			this.centerOn(it)
 		}
-		le.onMove {
-			PlayerPos.posX = le.children[0].x
-			PlayerPos.posY = le.children[0].y
-			var jsons = json.encodeToString(PlayerPos)
-			resourcesVfs["editor.json"].writeString(jsons)
-		}
-		/*var play = uiButton("Play").centerOnStage().onClick {
+		
+		var play = uiButton("Play the Game").centerOnStage().onClick {
 			sceneContainer.changeTo<TankGame>(time = 1.seconds)
-		}*/
+		}
 		
 		
 	}
