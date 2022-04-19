@@ -37,7 +37,6 @@ class MainMenuScene : Scene() {
 					textSize = 50.0
 				}
 				colorMul = Colors.GREEN
-				y = ShootingGameButton.y
 				y += 100.0
 				onClick {
 					sceneContainer.pushTo<TankGame>(0.5.seconds, transition = MaskTransition(transition = TransitionFilter.Transition.DIAGONAL2, smooth = true))
