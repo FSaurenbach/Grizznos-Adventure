@@ -31,23 +31,12 @@ class MainMenuScene : Scene() {
 			 down(Key.ESCAPE){views.gameWindow.exit()}
 		}
 		container {
-			var ShootingGameButton = uiButton(512.0, 64.0, "ShootingGame") {
-				/*uiSkin = UISkin{
-					textSize = 50.0
-				}*/
-				realUiSkin.textSize = 50.0
-				colorMul = Colors.GREEN
-				
-				onClick {
-					sceneContainer.pushTo<MainGameScene>(0.5.seconds, transition = MaskTransition(transition = TransitionFilter.Transition.DIAGONAL2, smooth = true))
-				}
-			}
+			
 			var TankGameButton = uiButton(512.0, 64.0, "Tank Game") {
 				uiSkin = UISkin{
 					textSize = 50.0
 				}
 				colorMul = Colors.GREEN
-				y = ShootingGameButton.y
 				y += 100.0
 				onClick {
 					sceneContainer.pushTo<TankGame>(0.5.seconds, transition = MaskTransition(transition = TransitionFilter.Transition.DIAGONAL2, smooth = true))
