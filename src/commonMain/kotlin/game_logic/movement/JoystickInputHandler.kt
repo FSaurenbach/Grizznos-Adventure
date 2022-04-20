@@ -13,22 +13,19 @@ import com.soywiz.korma.geom.sin
 import com.soywiz.korma.geom.vector.circle
 import kotlin.math.hypot
 
-var JoyBallPosition:Point = Point(0.0,0.0)
 var pressing = false
-
 fun Container.addJoystick(
-    stage: Stage,
     width: Double = 320.0,
     height: Double = 224.0,
     radius: Double = height / 8,
     onStick: (x: Double, y: Double) -> Unit = { _, _ -> }
 ) {
-    var rr = false
+    
     var dragging = false
     val view = this
     lateinit var ball: View
     radius * 2
-
+    
     container {
         position(450.0, 700.0)
         graphics {
@@ -40,16 +37,16 @@ fun Container.addJoystick(
             alpha(0.2)
         }
     }
-
-    val addComponent = view.addComponent(object : TouchComponent {
+    
+    view.addComponent(object : TouchComponent {
         override val view: BaseView = view
-
+        
         val start = Point(0, 0)
-
+        
         override fun onTouchEvent(views: Views, e: TouchEvent) {
             val px = e.activeTouches.firstOrNull()?.x ?: 0.0
             val py = e.activeTouches.firstOrNull()?.y ?: 0.0
-
+            
             when (e.type) {
                 TouchEvent.Type.START -> {
                     if (px >= width / 2) return
@@ -75,8 +72,6 @@ fun Container.addJoystick(
                         val lengthClamped = length.clamp(0.0, maxLength)
                         val angle = Angle.between(start.x, start.y, px, py)
                         ball.position(cos(angle) * lengthClamped, sin(angle) * lengthClamped)
-                        JoyBallPosition = ball.pos
-                        if (ball.pos <Point(0)) rr = true
                         val lengthNormalized = lengthClamped / maxLength
                         onStick(cos(angle) * lengthNormalized, sin(angle) * lengthNormalized)
                     }
