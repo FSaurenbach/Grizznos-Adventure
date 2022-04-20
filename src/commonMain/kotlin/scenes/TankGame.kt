@@ -1,5 +1,6 @@
 package scenes
 
+import MainModule.mapbridge
 import com.soywiz.klock.milliseconds
 import com.soywiz.klock.seconds
 import com.soywiz.kmem.clamp
@@ -9,23 +10,26 @@ import com.soywiz.korim.bitmap.BmpSlice
 import com.soywiz.korim.color.Colors
 import com.soywiz.korim.format.readBitmapSlice
 import com.soywiz.korio.file.std.resourcesVfs
+import game_logic.game.MapBridge
 import game_logic.movement.addJoystick
 import kotlin.math.pow
 
-class TankGame : Scene() {
+class TankGame(mapbridge: MapBridge) : Scene() {
 	override suspend fun Container.sceneInit() {
 		var speed = 1.5
 		var xJoystick = 0.0
 		var yJoystick = 0.0
 		
+		var mymap = mapbridge.map
 		
 		val camera = camera {
 		
 			
 		}
 		
-		var sand = roundRect(2000.0, 2000.0, 0.5, fill = Colors["#ffd02f"])
-		camera.addChild(sand)
+		/*var sand = roundRect(2000.0, 2000.0, 0.5, fill = Colors["#ffd02f"])
+		camera.addChild(sand)*/
+		camera.addChild(mymap!!)
 		
 		val playerAnimation = SpriteAnimation(
 			listOf<BmpSlice>(
@@ -44,12 +48,14 @@ class TankGame : Scene() {
 		tank.playAnimationLooped(spriteAnimation = playerAnimation)
 		addUpdater {
 			
-			
-			speed = if (tank.collidesWith(sand)) {
+			tank.onCollision(filter = { view -> view.name == "base" }) {
+				speed = 50.0
+			}
+			/*speed = if (tank.collidesWith(sand)) {
 				0.2
 			} else {
 				1.5
-			}
+			}*/
 		}
 		
 		var dx = 0.0
