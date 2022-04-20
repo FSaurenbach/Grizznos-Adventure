@@ -2,7 +2,7 @@ import com.soywiz.korge.Korge
 import com.soywiz.korge.scene.Module
 import com.soywiz.korgw.GameWindow
 import com.soywiz.korinject.AsyncInjector
-import com.soywiz.korma.geom.SizeInt
+import game_logic.game.MapBridge
 import scenes.*
 
 suspend fun main() = Korge(Korge.Config(module = MainModule))
@@ -15,11 +15,11 @@ object MainModule : Module() {
 	override val mainScene = EditorScene::class
 	override val title = "Grizznos Adventure by Schneckedde"
 /*	override val size: SizeInt = SizeInt(1920, 1080)*/
-	
+	val mapbridge = MapBridge()
 	/** Adds the scenes to the module*/
 	override suspend fun AsyncInjector.configure() {
 		mapPrototype { MainMenuScene() }
-		mapPrototype { TankGame() }
-		mapPrototype { EditorScene() }
+		mapPrototype { TankGame(mapbridge) }
+		mapPrototype { EditorScene(mapbridge) }
 	}
 }
