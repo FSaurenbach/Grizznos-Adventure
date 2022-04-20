@@ -16,7 +16,7 @@ import kotlin.math.pow
 
 class TankGame(mapbridge: MapBridge) : Scene() {
 	override suspend fun Container.sceneInit() {
-		var speed = 1.5
+		var speed = 0.5
 		var xJoystick = 0.0
 		var yJoystick = 0.0
 		
@@ -27,8 +27,8 @@ class TankGame(mapbridge: MapBridge) : Scene() {
 			
 		}
 		
-		/*var sand = roundRect(2000.0, 2000.0, 0.5, fill = Colors["#ffd02f"])
-		camera.addChild(sand)*/
+		var sand = roundRect(2000.0, 2000.0, 0.5, fill = Colors["#ffd02f"])
+		camera.addChild(sand)
 		camera.addChild(mymap!!)
 		
 		val playerAnimation = SpriteAnimation(
@@ -49,7 +49,8 @@ class TankGame(mapbridge: MapBridge) : Scene() {
 		addUpdater {
 			
 			tank.onCollision(filter = { view -> view.name == "base" }) {
-				speed = 50.0
+				print("fds")
+				speed = 0.2
 			}
 			/*speed = if (tank.collidesWith(sand)) {
 				0.2
@@ -70,8 +71,8 @@ class TankGame(mapbridge: MapBridge) : Scene() {
 		}
 		
 		var joystick = addJoystick(
-			stage!!,
-			views.virtualWidthDouble, views.virtualHeightDouble,
+			views.virtualWidthDouble,
+			views.virtualHeightDouble,
 			
 			) { x, y -> movePlayerByJoystick(x, y, tank) }
 		addUpdater {
