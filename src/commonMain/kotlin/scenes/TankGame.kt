@@ -43,6 +43,7 @@ class TankGame(mapbridge: MapBridge) : Scene() {
 		)
 		
 		val tank = Sprite(resourcesVfs["tank/idle.png"].readBitmapSlice()).centerOn(camera).addTo(this)
+tank.centerOn(sand)
 		tank.smoothing = false
 		tank.scale = 4.0
 		tank.playAnimationLooped(spriteAnimation = playerAnimation)
