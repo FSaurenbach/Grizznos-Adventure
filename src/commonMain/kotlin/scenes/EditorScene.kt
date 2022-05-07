@@ -11,6 +11,8 @@ import com.soywiz.korge.scene.Scene
 import com.soywiz.korge.ui.uiButton
 import com.soywiz.korge.view.*
 import com.soywiz.korim.color.Colors
+import com.soywiz.korma.geom.shape.Shape2d
+import com.soywiz.korma.geom.vector.VectorPath
 import game_logic.game.MapBridge
 import kotlinx.serialization.Serializable
 
@@ -41,20 +43,18 @@ class EditorScene(mapbridge: MapBridge) : Scene() {
 		
 		var map = container {
 			var d = roundRect(50, 50, 5, fill = Colors.WHITE).draggable{}
-			d.name = "base"
 			d.onCollision(filter = { view -> view.name == "grid" }) {
 				this.centerOn(it)
 			}
 			var dd = roundRect(50, 50, 5, fill = Colors.WHITE).draggable {}
-			dd.name = "base"
 			dd.onCollision(filter = { view -> view.name == "grid" }) {
 				this.centerOn(it)
 			}
 			var ddd = roundRect(50, 50, 5, fill = Colors.WHITE).draggable {}
-			ddd.name = "base"
 			ddd.onCollision(filter = { view -> view.name == "grid" }) {
 				this.centerOn(it)
 			}
+
 		}
 		mapbridge.map = map
 		
