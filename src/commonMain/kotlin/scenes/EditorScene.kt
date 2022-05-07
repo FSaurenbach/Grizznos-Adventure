@@ -11,9 +11,6 @@ import com.soywiz.korge.scene.Scene
 import com.soywiz.korge.ui.uiButton
 import com.soywiz.korge.view.*
 import com.soywiz.korim.color.Colors
-import com.soywiz.korma.geom.shape.Shape2d
-import com.soywiz.korma.geom.vector.VectorPath
-import game_logic.game.MapBridge
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -22,7 +19,7 @@ data class PlayerPos(
 
 )
 
-class EditorScene(mapbridge: MapBridge) : Scene() {
+class EditorScene : Scene() {
 	override suspend fun Container.sceneInit() {
 		print("sceneInit")
 		var mymap = container {
@@ -42,18 +39,34 @@ class EditorScene(mapbridge: MapBridge) : Scene() {
 		
 		
 		var map = container {
-			var d = roundRect(50, 50, 5, fill = Colors.WHITE).draggable{}
+			var d = roundRect(50, 50, 5, fill = Colors["#5eff00"]).draggable{}
+			d.position(35, 645)
 			d.onCollision(filter = { view -> view.name == "grid" }) {
 				this.centerOn(it)
 			}
-			var dd = roundRect(50, 50, 5, fill = Colors.WHITE).draggable {}
+			var dd = roundRect(50, 50, 5, fill = Colors["#5eff00"]).draggable {}
+			dd.position(35, 645)
+			dd.alignLeftToRightOf(d)
 			dd.onCollision(filter = { view -> view.name == "grid" }) {
 				this.centerOn(it)
 			}
-			var ddd = roundRect(50, 50, 5, fill = Colors.WHITE).draggable {}
+			var ddd = roundRect(50, 50, 5, fill = Colors["#5eff00"]).draggable {}
+			ddd.position(35, 645)
+			ddd.alignLeftToRightOf(dd)
 			ddd.onCollision(filter = { view -> view.name == "grid" }) {
 				this.centerOn(it)
 			}
+			var dddd = roundRect(50, 50, 5, fill = Colors["#5eff00"]).draggable {}
+			dddd.position(35, 645)
+			dddd.alignLeftToRightOf(ddd)
+			dddd.onCollision(filter = { view -> view.name == "grid" }) {
+				this.centerOn(it)
+			}
+
+
+
+
+
 
 		}
 		mapbridge.map = map

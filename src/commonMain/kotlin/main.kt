@@ -19,7 +19,7 @@ object MainModule : Module() {
 	/** Adds the scenes to the module*/
 	override suspend fun AsyncInjector.configure() {
 		mapPrototype { MainMenuScene() }
-		mapPrototype { TankGame(mapbridge) }
-		mapPrototype { EditorScene(mapbridge) }
+		mapPrototype { TankGame() }
+		mapPrototype { EditorScene() }
 	}
 }

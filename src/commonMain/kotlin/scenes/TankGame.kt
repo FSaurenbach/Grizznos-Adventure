@@ -4,6 +4,8 @@ import MainModule.mapbridge
 import com.soywiz.klock.milliseconds
 import com.soywiz.klock.seconds
 import com.soywiz.kmem.clamp
+import com.soywiz.korge.input.draggable
+import com.soywiz.korge.input.onMouseDrag
 import com.soywiz.korge.scene.Scene
 import com.soywiz.korge.view.*
 import com.soywiz.korim.bitmap.BmpSlice
@@ -14,20 +16,22 @@ import game_logic.game.MapBridge
 import game_logic.movement.addJoystick
 import kotlin.math.pow
 
-class TankGame(mapbridge: MapBridge) : Scene() {
+class TankGame() : Scene() {
 	override suspend fun Container.sceneInit() {
+
 		var speed = 0.5
 		var xJoystick = 0.0
 		var yJoystick = 0.0
 		
 		var mymap = mapbridge.map
+
 		
 		val camera = camera {
 		
 			
 		}
 		
-		var sand = roundRect(2000.0, 2000.0, 0.5, fill = Colors["#ffd02f"])
+		var sand = roundRect(2000.0, 2000.0, 0.5, fill = Colors["#fdf4ff"])
 		camera.addChild(sand)
 		camera.addChild(mymap!!)
 		
@@ -43,6 +47,8 @@ class TankGame(mapbridge: MapBridge) : Scene() {
 		)
 		
 		val tank = Sprite(resourcesVfs["tank/idle.png"].readBitmapSlice()).centerOn(camera).addTo(this)
+		tank.y -=250.0
+		tank.x -=250.0
 		tank.smoothing = false
 		tank.scale = 4.0
 		tank.playAnimationLooped(spriteAnimation = playerAnimation)
@@ -52,11 +58,7 @@ class TankGame(mapbridge: MapBridge) : Scene() {
 				print("fds")
 				speed = 0.2
 			}
-			/*speed = if (tank.collidesWith(sand)) {
-				0.2
-			} else {
-				1.5
-			}*/
+
 		}
 		
 		var dx = 0.0
